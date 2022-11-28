@@ -10,7 +10,7 @@ export type PostReci={
       name: String;
       email:String;
     } | null;
-    category: String;
+    //category: String;
     ingredients: String;
     preparation: String;
   };

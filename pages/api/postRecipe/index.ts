@@ -7,15 +7,20 @@ import prisma from '../../../lib/prisma';
 // Required fields in body: title
 // Optional fields in body: content
 export default async function handle(req, res) {
-  const { title, content } = req.body;
-  
+  const { nameRecipe, ingredients, preparation } = req.body; 
+
+
   const session = await getSession({ req });
-  const result = await prisma.post.create({
-    data: {
-      title: title,
-      content: content,
-      author: { connect: { email: session?.user?.email } },
-    }, 
-  });
+
+  const result = await prisma.recipes.create({
+    data:  {
+      nameRecipe: nameRecipe,
+      ingredients: ingredients,
+      preparation: preparation,
+      writer: { connect: { email: session?.user?.email } },
+    },
+
+  })
   res.json(result);
+  
 }
